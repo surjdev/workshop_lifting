@@ -15,19 +15,20 @@ pose = mp_pose.Pose()
 def pred_in_video(video_file):
     if video_file:
         cap = cv2.VideoCapture(video_file)
-        frame_width = int(cap.get(3))
-        frame_height = int(cap.get(4))
+        # frame_width = int(cap.get(3))
+        # frame_height = int(cap.get(4))
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         
-        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
-        out_file = temp_file.name  # Get temp file path
+        # temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
+        # out_file = temp_file.name  # Get temp file path
 
-        out = cv2.VideoWriter(
-                            out_file,
-                            cv2.VideoWriter_fourcc(*"mp4v"),
-                            fps,
-                            (frame_width, frame_height)
-                            )
+        # out = cv2.VideoWriter(
+        #                     out_file,
+        #                     cv2.VideoWriter_fourcc(*"mp4v"),
+        #                     fps,
+        #                     (frame_width, frame_height)
+        #                     )
+        
         data_dict = {'time':[]}
         frame_number = 0
 
@@ -73,15 +74,15 @@ def pred_in_video(video_file):
                     data_dict[column_vi].append(result_landmark[i].visibility)
 
             # Save frame to output video
-            out.write(frame)
+            # out.write(frame)
 
     cap.release()
-    out.release()
+    # out.release()
 
     df = pd.DataFrame(data_dict)
-    converted_file = out_file.replace(".mp4", "_converted.mp4")
-    convert_to_h264(out_file, converted_file)
+    # converted_file = out_file.replace(".mp4", "_converted.mp4")
+    # convert_to_h264(out_file, converted_file)
 
-    time.sleep(1)
-
-    return converted_file, df
+    # time.sleep(1)
+    # converted_file,
+    return df
